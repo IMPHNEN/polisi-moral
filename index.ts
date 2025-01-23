@@ -1,4 +1,4 @@
-import { Client, Message, type OmitPartialGroupDMChannel } from "discord.js"
+import { Client, Message, TextChannel, type OmitPartialGroupDMChannel } from "discord.js"
 import dotenv from "dotenv"
 import { Client as GClient } from "@gradio/client";
 import { ContentType } from "./content-type";
@@ -28,13 +28,14 @@ client.on("messageCreate", async (message: OmitPartialGroupDMChannel<Message<boo
     
                 if(inference.includes("nsfw")){
                     nsfw_count += 1
-                    console.log(`[${new Date().toISOString()}] Found NSFW Content !`)
+                    console.log(`[${new Date().toISOString()}] Found NSFW Content ! [User : ${message.author.toString()}]`)
                 }
             }
         }
     
         if(nsfw_count > 0){
-            await message.reply("Maaf pak, gambar yang anda kirim mengandung konten nsfw yang tidak layak dilihat anak kecil. Pesan anda sudah dihapus, tolong lapor kepada admin jika ini merupakan sebuah kesalahan. Hormat Kami Polisi Moral IMPHNEN")
+            await (client.channels.cache.get('1331942708633145344') as TextChannel).send(`${message.author.toString()} mengirimkan konten nsfw di ${message.guild?.channels.cache.get(message.channel.id.toString())?.toString()}`)
+            await message.reply(`${message.author.toString()} Maaf pak, gambar yang anda kirim mengandung konten nsfw yang tidak layak dilihat anak kecil. Pesan anda sudah dihapus, tolong lapor kepada admin jika ini merupakan sebuah kesalahan. Hormat Kami Polisi Moral IMPHNEN`)
             await message.delete()
         }
     }
