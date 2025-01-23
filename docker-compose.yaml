@@ -1,0 +1,7 @@
+services:
+  app:
+    image: polisimoral:latest
+    tty: true
+    mem_limit: 800M
+    restart: always
+    network_mode: bridge
