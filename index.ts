@@ -18,7 +18,6 @@ client.on("messageCreate", async (message: OmitPartialGroupDMChannel<Message<boo
         if(!ChannelWhitelist.includes(message.channel.id)) return
 
         let nsfw_count = 0
-
         for(let i = 0; i < message.attachments.size; i++){
             if(message.attachments.at(i)?.contentType && ContentType.includes(<string>message.attachments.at(i)?.contentType)){
                 const image = await (await fetch(<string>message.attachments.at(i)?.url)).blob()
@@ -35,8 +34,8 @@ client.on("messageCreate", async (message: OmitPartialGroupDMChannel<Message<boo
         }
     
         if(nsfw_count > 0){
-            message.reply("Maaf pak, gambar yang anda kirim mengandung konten nsfw yang tidak layak dilihat anak kecil. Pesan anda sudah dihapus, tolong lapor kepada admin jika ini merupakan sebuah kesalahan. Hormat Kami Polisi Moral IMPHNEN")
-            message.delete()
+            await message.reply("Maaf pak, gambar yang anda kirim mengandung konten nsfw yang tidak layak dilihat anak kecil. Pesan anda sudah dihapus, tolong lapor kepada admin jika ini merupakan sebuah kesalahan. Hormat Kami Polisi Moral IMPHNEN")
+            await message.delete()
         }
     }
     catch (err){

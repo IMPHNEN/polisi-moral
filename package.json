@@ -12,6 +12,8 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "@gradio/client": "^1.10.0"
+    "@gradio/client": "^1.10.0",
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7"
   }
 }
